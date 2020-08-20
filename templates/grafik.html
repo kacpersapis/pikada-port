@@ -1,0 +1,113 @@
+{% extends 'glowna.html' %}
+
+    {% block tytul %} Grafik {% endblock %}
+
+{% block strona %}
+
+<nav class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
+    {% if user.is_authenticated %}
+    <a class="navbar-brand col-md-3 col-lg-2 mr-0 px-3" >Cześć {{ user.username }}</a>
+
+
+    <ul class="navbar-nav px-3">
+      <li class="nav-item text-nowrap">
+         <a href="{% url 'logout' %}" class="btn btn-dark">Logout <i class="fas fa-sign-out-alt"></i></a>
+                {% else %}
+                <a href="{% url 'login' %}">Login</a>
+                {% endif %}
+      </li>
+    </ul>
+  </nav>
+<div class="container-fluid">
+    <div class="row">
+      <nav id="sidebarMenu" class="col-md-3 col-lg-2 d-md-block bg-light sidebar collapse">
+        <div class="sidebar-sticky pt-3 bg-dark">
+          <ul class="nav flex-column">
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'caly_grafik' %}">
+                <span data-feather="home"></span>
+                <i class="fas fa-book"></i> Grafik
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'nowa_wycieczka' %}">
+                <span data-feather="file"></span>
+                <i class="fas fa-plus-circle"></i> Nowa wycieczka
+              </a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="{% url 'list' %}">
+                <span data-feather="todolist"></span>
+                <i class="fas fa-tasks"></i> To do list
+              </a>
+            </li>
+
+
+          </ul>
+        </div>
+      </nav>
+
+      <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+        <div
+          class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+          <h1 class="h2">Grafik</h1>
+
+
+        </div>
+<div class="row justify-content-center">
+    {% if grafik|length == 0 %}
+        <h2>Brak wycieczek</h2>
+    {% else %}
+        <h2>Ilość wycieczek w bazie danych: {{ grafik|length }}</h2>
+
+        {% for wycieczka in grafik %}
+    </div>
+        <div class="row justify-content-center">
+            <div class="card" style="width: 56rem;">
+              <div class="card-body">
+                  <div class="row">
+                      <div class="col-10">
+                            <h5 class="card-title">{{ wycieczka }}</h5>
+                      </div>
+                        <div class="col-2">
+                            <a href="{% url 'edytuj_wycieczke' wycieczka.id %}"><i class="fas fa-2x fa-edit"></i></a>
+                            <a href="{% url 'usun_wycieczke' wycieczka.id %}"><i class="fas fa-2x fa-trash-alt"></i></a>
+                        </div>
+                      </div>
+                  <div class="row">
+                         <p class="card-text">Liczba uczestników: <b>{{ wycieczka.uczestnicy }}</b></p>
+                  </div>
+                  <div class="row">
+                      <p class="card-text">Cena: <b>{{ wycieczka.cena }} zł</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Instytucja: <b>{{ wycieczka.instutucja }}</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Organizator: <b>{{ wycieczka.organizator }}</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Wyżywienie: <b>{{ wycieczka.wyżywienie }}</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Przewoźnik: <b>{{ wycieczka.przewoźnik }}</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Umowa: <b>{{ wycieczka.umowa }}</b></p>
+                  </div>
+                  <div class="row">
+                         <p class="card-text">Program: {{ wycieczka.program }}</p>
+                  </div>
+              </div>
+            </div>
+
+        {% endfor %}
+    {% endif %}
+        </div>
+
+      </main>
+    </div>
+  </div>
+
+
+{% endblock %}
