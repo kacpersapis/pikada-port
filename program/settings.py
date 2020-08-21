@@ -9,7 +9,7 @@ https://docs.djangoproject.com/en/3.1/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/3.1/ref/settings/
 """
-
+import os
 from pathlib import Path
 from decouple import config
 from dj_database_url import parse as dburl
@@ -118,7 +118,7 @@ STATIC_URL = '/static/'
 
 STATIC_ROOT = os.path.join(BASE_DIR, 'moje_static')
 
-STATICFIELDS_DIRS = ['moje_static']
+#STATICFIELDS_DIRS = ['moje_static']
 
 MEDIA_URL = '/pliki/'
 MEDIA_ROOT = 'moje_pliki'
